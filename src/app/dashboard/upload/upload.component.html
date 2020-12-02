@@ -1,0 +1,117 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="15px">
+  <mat-card *ngFor="let item of (uploadInProgress$ | async) let i=index">
+    <mat-card-header>
+      <mat-card-title>{{item.videoTittle}}</mat-card-title>
+      <mat-card-subtitle>{{item.videoType}}</mat-card-subtitle>
+    </mat-card-header> uploaded to
+    {{item.channelName}}
+    <mat-card-content>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-progress-bar color="warn" mode="indeterminate" *ngIf="videoProcessedFinishedIndicator[i]"></mat-progress-bar>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+<span *ngIf="isVideoUploaded">Uploading...</span>
+<mat-progress-bar color="warn" *ngIf="isVideoUploaded" [value]="progressValue"> </mat-progress-bar>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px" *ngIf="displayUploadForm">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxFlex="50%">
+    <div class="dropzone" id="dropzone">
+      <h3 *ngIf="!addvideoButtonDisableTracker">Drag Video Here or</h3>
+      <mat-card *ngIf="addvideoButtonDisableTracker">
+        <mat-card-header>
+          <mat-card-title>Name {{videoFile?.name}}</mat-card-title>
+          <mat-card-subtitle>Size {{(videoFile.size)/1000000}} MB</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <input type="file" style="display: none" #fileInput (change)="onVideoFileChange($event.target.files[0])">
+      <button mat-raised-button color="warn" (click)="fileInput.click()" [disabled]='addvideoButtonDisableTracker'>Add Video</button>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="45px" >
+        <div>
+            <input type="file"  style="display: none" #imageFileInput (change)="onImageFileChange($event)">
+            <button mat-raised-button color="warn" (click)="imageFileInput.click()">Add Cover</button>
+        </div>
+        <div>
+          <img [src]="imagePreviewUrl" style="width: 70%; height: 70%;">
+        </div>
+    </div>
+
+  </div>
+
+  <div fxFlex="50%">
+
+    <form [formGroup]="uploadForm" fxLayout="column" fxLayoutAlign="center   center" fxLayoutGap="10px">
+
+
+      <mat-form-field appearance="outline" style="width: 450px; max-width: 500px;">
+        <mat-label>Tittle</mat-label>
+        <input matInput formControlName="tittle">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" style="width: 450px; max-width: 500px;">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 450px; max-width: 500px;">
+        <mat-label>Add Tag here</mat-label>
+        <input matInput formControlName="tag">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="outline" style="width: 450px; max-width: 500px;">
+        <mat-label>Select Channel</mat-label>
+        <mat-select formControlName="channelId">
+          <mat-option *ngFor="let channel of (channelCreated$ | async)" [value]="channel._id">
+            {{channel.channelName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-slide-toggle color="warn" formControlName="premium" style="padding-left: 160px;">Premium</mat-slide-toggle>
+
+      <mat-form-field appearance="outline" *ngIf="isPremium" style="width: 450px; max-width: 500px;">
+        <mat-label>Enter Amount</mat-label>
+        <input matInput formControlName="amount">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" *ngIf="isPremium" style="width: 450px; max-width: 500px;">
+        <mat-label>Enter CreditCard Number</mat-label>
+        <input matInput formControlName="creditCard">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint></mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="warn" style="width: 200px; max-width: 250px;" (click)="upload()">Upload</button>
+    </form>
+
+  </div>
+</div>
+
+
+
+<button mat-raised-button *ngIf="!displayUploadForm" (click)="addUploadForm()">Add more Video</button>
+
+
+
+
+<!-- <mat-progress-bar color="warn" *ngIf="isVideoProcessed" mode="indeterminate"> </mat-progress-bar> -->
+

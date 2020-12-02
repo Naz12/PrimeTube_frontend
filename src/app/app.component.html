@@ -1,0 +1,128 @@
+<mat-sidenav-container style="height: 100%">
+
+  <mat-sidenav #drawer fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    style="background-color: black; padding-top: 8px;" [mode]="(isHandset$ | async) ? 'side' : 'over'"
+    [opened]="(isHandset$ | async) ||  !(togglesideNav$ | async)">
+    <mat-toolbar>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>PrimeTube</span>
+    </mat-toolbar>
+    <mat-nav-list>
+
+
+
+      <a mat-list-item routerLink="/home">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+          <mat-icon aria-label="Side nav toggle icon">home</mat-icon>
+        </button>
+        <span>Home</span>
+      </a>
+
+
+      <a mat-list-item routerLink="/library">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+          <mat-icon aria-label="Side nav toggle icon">folder</mat-icon>
+        </button>
+        <span>Library</span>
+      </a>
+
+      <a mat-list-item routerLink="/live">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+          <mat-icon aria-label="Side nav toggle icon">cast</mat-icon>
+        </button>
+        <span>Live</span>
+      </a>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Subscriptions
+          </mat-expansion-panel-header>
+
+          <a mat-list-item *ngFor="let subscription of (appService.subscriptions$ | async);"
+            [routerLink]="['/channel' , subscription.channelId._id , 'home' ]">
+            {{subscription?.channelId?.channelName}}
+          </a>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content style="background-color: black">
+
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span [routerLink]="[ '/home']">PrimeTube</span>
+
+        <span class="example-spacer"></span>
+
+        <mat-menu #channeloption="matMenu">
+
+          <mat-card class="mat-elevation-z1">
+            <mat-card-header>
+              <div mat-card-avatar>
+                <img src="/assets/bk.jpeg" style="width: 50px; height: 50px; border-radius: 50%; padding-left: 5px; padding-top: 20px"
+                  mat-card-image>
+              </div>
+              <mat-card-title>{{(appService.currentUser$ | async)?.username}}</mat-card-title>
+              <mat-card-subtitle>{{(appService.currentUser$ | async)?.email}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+              <button mat-menu-item *ngIf="(loggedIn$ | async)" (click)="logOut()">Logout</button>
+            </mat-card-actions>
+          </mat-card>
+
+          <button mat-menu-item>Account</button>
+          <button mat-menu-item [routerLink]="[ '/dashboard/home' ]">Dashboard</button>
+          <button mat-menu-item>Messages</button>
+
+          <button mat-menu-item>settings</button>
+          <button mat-menu-item>Profile</button>
+        </mat-menu>
+
+
+        <!-- <button mat-icon-button>
+            <mat-icon class="example-icon">favorite</mat-icon>
+        </button> -->
+
+        <!-- <a mat-list-item *ngIf="!(loggedIn$ | async)" routerLink="/auth/signup">Sign up</a>
+        <a mat-list-item >Logout</a>
+        <a mat-list-item *ngIf="!(loggedIn$ | async)" routerLink="/auth/signin">Login</a> -->
+        <button mat-button *ngIf="!(loggedIn$ | async)" routerLink="/auth/signup" class="example-icon">Sign up</button>
+        <button mat-button *ngIf="!(loggedIn$ | async)" routerLink="/auth/signin" class="example-icon">Sign in</button>
+
+        <button mat-icon-button *ngIf="(loggedIn$ | async)">
+          <mat-icon>mail</mat-icon>
+        </button>
+
+        <button mat-icon-button *ngIf="(loggedIn$ | async)">
+          <mat-icon>notifications</mat-icon>
+        </button>
+
+
+        <img src="/assets/bk.jpeg" style="width: 50px; height: 50px; border-radius: 50%;" *ngIf="(loggedIn$ | async)"
+          [matMenuTriggerFor]="channeloption" class="example-icon">
+
+
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+
+    <div style="padding-left: 2%">
+      <router-outlet></router-outlet>
+    </div>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

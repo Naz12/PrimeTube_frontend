@@ -1,0 +1,70 @@
+<mat-card style="background-color: black">
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
+    <div fxFlex="80%">
+      <mat-card-title>{{videoInfo?.videoTittle}}</mat-card-title>
+      <mat-card-subtitle *ngIf="videoInfo?.isLive">{{liveRoomUserCount}} watching</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="!videoInfo?.isLive">{{videoInfo?.watchCount}} views</mat-card-subtitle>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px" fxFlex="20%">
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span #likeCount>{{videoInfo?.like?.length}}</span>
+        <button mat-icon-button (click)="like()">
+          <mat-icon [color]="isLiked? 'warn': 'primary'">thumb_up</mat-icon>
+        </button>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span #dislikeCount>{{videoInfo?.dislike?.length}}</span>
+        <button mat-icon-button (click)="dislike()">
+          <mat-icon [color]="isDisliked? 'warn': 'primary'">thumb_down</mat-icon>
+        </button>
+      </div>
+
+      <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+       <button mat-stroked-button color="warn"  *ngIf="videoInfo?.videoVersionPath">Live now</button>
+    
+      </div> -->
+
+      <mat-form-field *ngIf="videoInfo?.videoType == videoTypes[0]">
+        <mat-label>Download</mat-label>
+        <mat-select placeholder="Download" [(ngModel)]="selectedVideoForDownload" name="video">
+          <mat-option *ngFor="let video of videoInfo?.videoVersionPath" [value]="video" (click)="DownloadVideo()">
+            {{video?.split('/')[5]}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+  </div>
+
+</mat-card>
+
+
+<mat-card style="background-color: black">
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
+    <div fxFlex="90%">
+      <mat-card-title>
+        <a [routerLink]="[ '/channel', videoInfo?.channelId?._id , 'home' ]" style="color: white;">{{videoInfo?.channelId?.channelName}}</a>
+      </mat-card-title>
+      <mat-card-subtitle>Published on {{videoInfo?.dateCreated?.toLocaleString()}} </mat-card-subtitle>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutAlign="end end" fxFlex="20%">
+      <button mat-raised-button color="warn" *ngIf="!isSubscribed" (click)="subscribeChannel()" [disabled]="checkCreatedChannel(channelId)">Subscribe</button>
+      <button mat-raised-button color="accent" *ngIf="isSubscribed" (click)="unsubscribeChannel()">Unsubscribe</button>
+    </div>
+
+
+
+    <mat-divider color="accent"></mat-divider>
+
+  </div>
+
+</mat-card>

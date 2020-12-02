@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Warning</h1>
+<div mat-dialog-content>
+   Before stoping the Live stream make sure to stop streaming from the software encoder.
+    the video is not processed and saved to your cannel unless
+   you stop the streaming first.
+
+</div>
+
+<div mat-dialog-content>
+  press cancel to go back and stop streaming from encoding software or press Stop Live if you already stop the stream 
+</div>
+
+<div mat-dialog-actions> 
+  <button mat-button cdkFocusInitial [mat-dialog-close]="'no'">Cancel</button>
+  <button mat-button #createButton [mat-dialog-close]="'yes'" color="warn" (click)="stopLiveStream()">Stop Live</button>
+</div> 

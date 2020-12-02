@@ -1,0 +1,26 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="20px" fxHide.xs fxFlex="15%">
+    <img src="/assets/bk.jpeg" style="max-width: 200px; max-height: 200px; border-radius: 50%;">
+
+    <mat-action-list>
+      <button mat-list-item> Videos </button>
+      <button mat-list-item [routerLink]="[ '/dashboard/home' ]">Upload Video</button>
+      <button mat-list-item [matMenuTriggerFor]="channeloption"> Go Live </button>
+      <button mat-list-item (click)="onOpenDialog()"> Create channel </button>
+      <button mat-list-item> Channels </button>
+    </mat-action-list>
+
+
+    <mat-menu #channeloption="matMenu">
+      <button *ngFor="let channel of (ownChannel$ | async)" mat-menu-item
+        [routerLink]="[ '/dashboard/live' , channel._id , channel.streamKey]">
+        {{channel.channelName}}
+      </button>
+    </mat-menu>
+
+  </div>
+
+  <div fxFlex="85%">
+    <router-outlet></router-outlet>
+  </div>
+</div>

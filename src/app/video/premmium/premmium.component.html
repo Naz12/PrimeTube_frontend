@@ -1,0 +1,21 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15%">
+  <h1 mat-dialog-title>Checkout</h1>
+
+  <div mat-dialog-content style="height: 200px;">
+    <mat-spinner *ngIf="!isvideoInfoLoaded" color="warn"></mat-spinner>
+
+    <h1 *ngIf="isvideoInfoLoaded" mat-dialog-title>Name {{videoData?.videoTittle}}</h1>
+    <h1 *ngIf="isvideoInfoLoaded" mat-dialog-title>Type -> Single Video</h1>
+    <h1 *ngIf="isvideoInfoLoaded" mat-dialog-title>Price   {{videoData?.price}} Birr</h1>
+  </div>
+
+  <div mat-dialog-content *ngIf="isvideoInfoLoaded">
+    <button mat-raised-button color="warn">
+      <a [href]="paymentUrl">pay with yenepay</a>
+    </button>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button cdkFocusInitial [mat-dialog-close]>close</button>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.channel-container{
+    display: flex;
+    flex-flow: row;
+    background-color: brown;
+   justify-content: space-around;
+
+}
+
+.button-group{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}

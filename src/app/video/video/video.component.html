@@ -1,0 +1,12 @@
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutGap="15px" fxFlex="75%" fxFlex.lt-lg="100%">
+    <app-player></app-player>
+    <app-video-description></app-video-description>
+  </div>
+
+  <div fxHide.lt-lg fxFlex="25%">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

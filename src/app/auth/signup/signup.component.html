@@ -1,0 +1,80 @@
+<div style="padding-top: 5%" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="35px">
+  <div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div fxLayout="column" fxLayoutAlign="start strech" fxLayoutGap="35px">
+
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" fxFlexOffset.lt-lg="4%" fxFlexOffset="3%">
+    <button mat-raised-button>Sign in with facebook</button>
+    <mat-divider color="warn"></mat-divider>
+  </div>
+
+
+
+  <form [formGroup]="registerForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+
+    <mat-card-title>Sign up with Email</mat-card-title>
+
+    <mat-form-field appearance="outline" style="width: 80%; max-width: 500px;">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 80%; max-width: 500px;">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 80%; max-width: 500px;">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 80%; max-width: 500px;">
+      <mat-label>Email Address</mat-label>
+      <input matInput formControlName="email">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint></mat-hint>
+    </mat-form-field>
+
+
+    <div formGroupName="passwordGroup" style="width: 80%; max-width: 500px;">
+
+      <mat-form-field appearance="outline" style="width: 100%; max-width: 500px;">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error *ngIf="registerForm.errors?.notmatch">the Password is Incorrect</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%; max-width: 500px;">
+        <mat-label>Confirm Passwrod</mat-label>
+        <input matInput formControlName="confirmPassword">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error *ngIf="registerForm.errors?.notmatch">the Password is Incorrect</mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="warn" style="width: 50%; max-width: 150px;" (click)="onRegister()">Submit</button>
+  </form>
+
+
+
+</div>

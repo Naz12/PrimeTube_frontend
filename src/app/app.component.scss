@@ -1,0 +1,33 @@
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.example-icon {
+    padding: 0 14px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+
+  
+  .sidenav {
+    width: 400px;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }  
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+
+  .navbar {
+    overflow: hidden;
+  }

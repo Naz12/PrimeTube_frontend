@@ -1,0 +1,7 @@
+<div data-shaka-player-container >
+  <video #player   autoplay id="video" (ended)="onVideoEnded()"  data-shaka-player controls crossorigin height="150%" width="100%">
+    <source *ngFor="let videoItem of videoData?.videoVersionPath;" src="http://192.168.43.166:3000/videos/31062982b608fbc45bf19579/360.mp4">
+  </video>
+</div>
+
+

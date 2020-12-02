@@ -1,0 +1,47 @@
+<div fxLayout="column" fxLayoutGap="30px">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="/assets/bk.jpeg" width="1400px" height="500px">
+  </div>
+
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{channel?.channelName}}</mat-card-title>
+      <mat-card-subtitle>{{channel?.subscribers?.length}} Subscribers</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content> 
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15%">
+        <button mat-button [routerLink]="[ '/channel', channelId, 'home' ]">Home</button>
+        <button mat-button [routerLink]="[ '/channel', channelId, 'playlists' ]">Playlist</button>
+        <button mat-button [routerLink]="[ '/channel' , channelId , 'videos' ]">Videos</button>
+        <button mat-button [routerLink]="[ '/channel' , channelId , 'about' ]">About</button>
+        <button mat-button>Search</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <div class="channel-container">
+  <img src="/assets/bd.jpeg">
+  <div class="button-group">
+    <button mat-button [routerLink]="[ '/channel', 'laksjflskdjf', 'home' ]">Home</button>
+    <button mat-button [routerLink]="[ '/channel', 'laksjflskdjf', 'playlists' ]">Playlist</button>
+    <button mat-button [routerLink]="[ '/channel' , 'laksjflskdjf' , 'videos' ]">Videos</button>
+    <button mat-button [routerLink]="[ '/channel' , 'laksjflskdjf' , 'about' ]">About</button>
+  </div>
+
+ 
+</div> -->
